@@ -1,0 +1,46 @@
+{
+  "name": "@diligentcorp/cloudwatch-cleaner",
+  "version": "1.0.0",
+  "description": "Script that deletes orphaned CloudWatch log groups",
+  "main": "./dist/index.js",
+  "packageManager": "pnpm@8.9.2",
+  "type": "module",
+  "engines": {
+    "node": ">=20.8.1"
+  },
+  "scripts": {
+    "start": "tsx index.ts",
+    "prepack": "rm -rf ./dist && esbuild index.ts --bundle --packages=external --outdir=dist --target=node18 --platform=node --format=esm --banner:js='#!/usr/bin/env node'",
+    "test": "tsx --test --test-reporter=spec $(glob '**/*.test.ts')",
+    "release": "changeset publish",
+    "lint": "eslint .",
+    "type-check": "tsc"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@tsconfig/node20": "^20.1.2",
+    "@tsconfig/strictest": "^2.0.2",
+    "@types/node": "^20.8.7",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "esbuild": "^0.19.5",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "npm:eslint-plugin-i@2.28.0-2",
+    "eslint-plugin-prettier": "^5.0.1",
+    "glob": "^10.3.10",
+    "prettier": "^3.0.3",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.431.0",
+    "@aws-sdk/client-codebuild": "^3.431.0",
+    "@aws-sdk/client-lambda": "^3.431.0",
+    "bottleneck": "^2.19.5"
+  }
+}
